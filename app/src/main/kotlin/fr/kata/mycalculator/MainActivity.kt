@@ -25,14 +25,22 @@ class MainActivity : AppCompatActivity() {
         display.text = presenter.getDisplay()
     }
 
-    fun digit_click(view: View) {
+    fun op_click(view: View) {
         when (view) {
-            digit_1, digit_2, digit_3 -> {
-                val btn = view as Button
-                presenter.addDigit(btn.text.toString())
+            operator_clear -> {
+                presenter.clear()
                 updateDisplay()
             }
-            else -> Log.i(TAG, "unknown key with $view")
+            else -> Log.i(TAG, "unknown op with $view")
+        }
+    }
+
+    fun digit_click(view: View) {
+        if (view is Button) {
+            presenter.addDigit(view.text.toString())
+            updateDisplay()
+        } else {
+            Log.e(TAG, "unknown digit with $view")
         }
     }
 }

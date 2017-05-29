@@ -5,9 +5,9 @@ package fr.kata.mycalculator
  */
 class Calculator {
 
-    private var current: Int = 0
+    var current: Int = 0
+        private set
 
-    fun getDisplay() = "$current"
 
     fun addDigit(digit: Int) {
         if (current == 0) {
@@ -18,7 +18,11 @@ class Calculator {
     }
 
     private fun concatDigit(current: Int, digit: Int): Int {
-        val string = current + digit
-        return string
+        val string = "$current$digit"
+        return string.toInt()
+    }
+
+    fun clear() {
+        current = 0
     }
 }

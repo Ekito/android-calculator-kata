@@ -3,17 +3,22 @@ package fr.kata.mycalculator
 /**
  * Created by arnaud on 29/05/2017.
  */
-class MainPresenter(val calculator: Calculator) {
+class MainPresenter(private val calculator: Calculator) {
 
-    fun getDisplay() = calculator.getDisplay()
+    fun getDisplay() = "${calculator.current}"
 
-    fun addDigit(d: String): String {
+    fun addDigit(d: String) {
         val digit = d.toIntOrNull()
-        if (digit != null) {
+        if (digit != null && isValidDigit(digit)) {
             calculator.addDigit(digit)
-            return getDisplay()
         } else
-            throw IllegalStateException("$d is not a digit")
+            throw IllegalStateException("$d is not a valid digit")
+    }
+
+    private fun isValidDigit(digit: Int) = digit in 0..9
+
+    fun clear() {
+        calculator.clear()
     }
 
 }
