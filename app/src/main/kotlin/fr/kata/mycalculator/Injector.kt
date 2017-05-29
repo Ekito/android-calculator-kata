@@ -5,6 +5,8 @@ package fr.kata.mycalculator
  */
 object Injector {
 
-    val calculator = Calculator()
+    val calculator: Calculator by lazy { Calculator() }
+
+    val presenter: MainPresenter by lazy { MainPresenter(calculator) }
 
 }
